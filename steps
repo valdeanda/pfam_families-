@@ -1,5 +1,5 @@
 
-Create a file containing a list of pfam terms:
+A file containing a list of pfam terms:
 $ less pfam_terms.tab:
 
 PF00005
@@ -148,15 +148,11 @@ PF13579.fasta:2343
 PF13746.fasta:591
 PF14306.fasta:945
 
-From the header of each sequence, obtain the list of UNIPROT identifiers 
+From the header of each sequence, obtain the list of UNIPROT identifiers in order to obtain the corresponding sps for each protein sequence
 for fasta in *; do grep  ">" $fasta | sed 's/ /\t/g' | sed 's/>//g' | sed 's/\//\t/g' | cut -f 1  > $fasta.uniprot.txt ; done
 
+We have a lot of headers names create folders and cd intothem 
+for i in *.txt; do mkdir $i.names && mv $i $i.names ; done 
 
-cat uniprot.txt | while read uni; do 
-unip=$(perl -MSOAP::Lite -e '$soap=SOAP::Lite->service("http://www.ebi.ac.uk/Tools/webservices/wsdl/WSDbfetch.wsdl");print $soap->fetchData("uniprot:$uni","fasta","raw")'
->$uni.pfam.txt ) 
-printf "$pfam"
-for i in `cat fasta.uniprot.txt` 
-perl -MSOAP::Lite -e '$soap=SOAP::Lite->service("http://www.ebi.ac.uk/Tools/webservices/wsdl/WSDbfetch.wsdl");print $soap->fetchData("uniprot:$i","fasta","raw")'
-
-
+Execute every time in the folder (not recomended for more thant 1000 request!! not useful! 
+for uni in `cat PF14306.fasta.uniprot.txt.names/PF14306.fasta.uniprot.txt `; do  perl -MSOAP::Lite -e '$soap=SOAP::Lite->service("http://www.ebi.ac.uk/Tools/webservices/wsdl/WSDbfetch.wsdl");print $soap->fetchData("uniprot:'$uni'","fasta","raw")'>> PF14306.fasta.uniprot.txt ; done
