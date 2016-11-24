@@ -7,12 +7,9 @@
 
   $ for pfam in `cat pfam_terms.tab ` ; do grep $pfam --after-context=1 Pfam-A.fasta > $pfam.fasta ; done 
 
- 3) Check if the number of sequences corresponde to the numer of sequences for each model 
+ 3) Check if the number of sequences corresponde to the numer of sequences for each model, (check seq_number.txt file)  
 
   $ grep -c ">" *.fasta 
-
-Number of proteins used to build each gene family 
-
 
 From the header of each sequence, obtain the list of UNIPROT identifiers in order to obtain the corresponding sps for each protein sequence
 for fasta in *; do grep  ">" $fasta | sed 's/ /\t/g' | sed 's/>//g' | sed 's/\//\t/g' | cut -f 1  > $fasta.uniprot.txt ; done
