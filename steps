@@ -19,9 +19,7 @@ protein sequence
 5) Fore each gene family (pfam) we have a header of the uniprot identifiers, with the latter, obtain a fasta file with the corresponding 
 specie in the header.  
 
-
-
-for pfam in `cat pfam_terms.tab ` ; do grep $pfam --after-context=1 Pfam-A.fasta > $pfam.fasta ; done 
+nohup for file in *.txt ; do ./parse_names.sh $file ; done &  
 
 
 
