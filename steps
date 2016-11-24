@@ -17,11 +17,9 @@ protein sequence
  $for fasta in *; do grep  ">" $fasta | sed 's/ /\t/g' | sed 's/>//g' | sed 's/\//\t/g' | cut -f 1  > $fasta.uniprot.txt ; done
 
 5) Fore each gene family (fasta.uniprot.tx) we have a header of the uniprot identifiers, with the latter, obtain a fasta file with the corresponding 
-specie in the header.  
+specie in the header.  Check the script get_sps_uniprot, and change the fasta path
 
-$ nohup for file in *.txt ; do ./parse_names.sh $file ; done &  
-
-
+$ nohup for file in *.txt ; do get_sps_uniprot.sh $file ; done &  
 
 
 For consulsts of less than 100 uniprot headers (not our case) 
