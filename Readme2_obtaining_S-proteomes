@@ -1,19 +1,32 @@
-#Acording to our previous results,
+1) Acording to our previous results,
 https://github.com/eead-csic-compbio/metagenome_Pfam_score
 
-#We use the list of sulfur genera listed in SuLy in order to obtain the newest proteomes of sulfur associated species. 
-
+2) Obtaining the complete assembly sumary of refseq 
  wget ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt
  
- #Obtain a list of complete non.viral genomes 
+3) Obtain a list of complete non.viral genomes 
  
  grep "Complete Genome" assembly_summary_refseq.txt | grep -v "Viral" > assembly_summary_refseq.cg.txt
  
- less assembly_summary_refseq.cg.txt | wc  
+4) Count them 
+less assembly_summary_refseq.cg.txt | wc  ==> 5952 complete secuenced genomes 
  
- Tienen que ser 5952 genomas completos (noviembre 2016) 
+5) We use the list of sulfur genera listed in SuLy in order to obtain the newest proteomes of sulfur associated species. 
+(see sucy.genera.txt)  
+
+while read line ; do grep "$line" assembly_summary_refseq.cg.txt; done <sucy.genera.txt   > SuLy.complete.genomes.refseq.tab
+
+6) Count them 
+less SuLy.complete.genomes.refseq.tab | wc ==> 241 complete secuenced genomes of sulfur cycle 
+
  
- obtener solo la descarga de los bichos de la zufre 
- 
- 
+7) Obtain the dowload links 
+
+less  SuLy.complete.genomes.refseq.tab | cut -f 20 |  sed  's/$/\/*.faa.gz/g' > SuLy.complete.genomes.refseq.download.links
+
+8)Dowload the genomes
+
+wget -i  SuLy.complete.genomes.refseq.download.links && gunzip *.gz && rm *gz.1  && ls | wc ==> 234 Complete proteomes of Sulfur Cycle
+
+
 
