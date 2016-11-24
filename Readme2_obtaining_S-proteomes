@@ -1,0 +1,19 @@
+#Acording to our previous results,
+https://github.com/eead-csic-compbio/metagenome_Pfam_score
+
+#We use the list of sulfur genera listed in SuLy in order to obtain the newest proteomes of sulfur associated species. 
+
+ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt
+ 
+ #Obtain a list of complete non.viral genomes 
+ 
+ grep "Complete Genome" assembly_summary_refseq.txt | grep -v "Viral" > assembly_summary_refseq.cg.txt
+ 
+ less assembly_summary_refseq.cg.txt | wc  
+ 
+ Tienen que ser 5952 genomas completos (noviembre 2016) 
+ 
+ obtener solo la descarga de los bichos de la zufre 
+ 
+ 
+
