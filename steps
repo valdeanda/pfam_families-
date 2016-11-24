@@ -22,7 +22,10 @@ specie in the header.  Check the script get_sps_uniprot, and change the fasta pa
 $ nohup for file in *.txt ; do get_sps_uniprot.sh $file ; done &  
 
 
-For consulsts of less than 100 uniprot headers (not our case) 
+
+
+
+easy way ..for consulsts of less than 100 uniprot headers (not our case) 
 
 
  $ for i in *.txt; do mkdir $i.names && mv $i $i.names ; done 
