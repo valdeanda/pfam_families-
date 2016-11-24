@@ -1,152 +1,18 @@
 
-A file containing a list of pfam terms:
-$ less pfam_terms.tab:
+1) Dowload the secuences from pfam database 
 
-PF00005
-PF00009
-PF00034
-PF00037
-PF00106
-PF00111
-PF00124
-PF00171
-PF00174
-PF00175
-PF00202
-PF00205
-PF00258
-PF00291
-PF00296
-PF00355
-PF00374
+  $ wget "ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.fasta.gz"
 
-Dowload the secuences from pfam database 
+2) Obtain fasta secuenes from each pfams (pfam_terms.tab)  in separated files 
 
-$ wget "ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.fasta.gz"
+  $ for pfam in `cat pfam_terms.tab ` ; do grep $pfam --after-context=1 Pfam-A.fasta > $pfam.fasta ; done 
 
-Obtain fasta secuenes from each pfams in separated files 
+ 3) Check if the number of sequences corresponde to the numer of sequences for each model 
 
-$ for pfam in `cat pfam_terms.tab ` ; do grep $pfam --after-context=1 Pfam-A.fasta > $pfam.fasta ; done 
+  $ grep -c ">" *.fasta 
 
-Check if the number of sequences corresponde to the numer of sequences for each model 
-
-$ grep -c ">" *.fasta 
 Number of proteins used to build each gene family 
 
-PF00005.fasta:179207
-PF00009.fasta:17624
-PF00034.fasta:6378
-PF00037.fasta:7248
-PF00106.fasta:44684
-PF00111.fasta:10100
-PF00124.fasta:283
-PF00171.fasta:24569
-PF00174.fasta:2822
-PF00175.fasta:10692
-PF00202.fasta:12686
-PF00205.fasta:6828
-PF00258.fasta:4774
-PF00291.fasta:16534
-PF00296.fasta:10377
-PF00355.fasta:8213
-PF00374.fasta:2129
-PF00378.fasta:16174
-PF00384.fasta:8053
-PF00389.fasta:10032
-PF00441.fasta:14973
-PF00459.fasta:6671
-PF00484.fasta:3074
-PF00501.fasta:48858
-PF00528.fasta:68708
-PF00534.fasta:27836
-PF00556.fasta:223
-PF00557.fasta:12034
-PF00581.fasta:18073
-PF00667.fasta:2547
-PF00848.fasta:2067
-PF00890.fasta:7029
-PF00970.fasta:6577
-PF01011.fasta:1059
-PF01058.fasta:2083
-PF01070.fasta:4137
-PF01077.fasta:4375
-PF01087.fasta:1389
-PF01208.fasta:2632
-PF01292.fasta:2944
-PF01370.fasta:20286
-PF01384.fasta:2786
-PF01507.fasta:3267
-PF01515.fasta:2662
-PF01547.fasta:6356
-PF01553.fasta:10977
-PF01568.fasta:5603
-PF01571.fasta:4525
-PF01583.fasta:1639
-PF01613.fasta:5158
-PF01747.fasta:660
-PF02167.fasta:837
-PF02332.fasta:200
-PF02406.fasta:116
-PF02515.fasta:5837
-PF02615.fasta:1178
-PF02635.fasta:2057
-PF02662.fasta:481
-PF02665.fasta:711
-PF02668.fasta:4635
-PF02770.fasta:14653
-PF02771.fasta:17315
-PF02775.fasta:10651
-PF02776.fasta:7018
-PF02826.fasta:11790
-PF02872.fasta:3205
-PF02910.fasta:3598
-PF03144.fasta:9920
-PF03358.fasta:7323
-PF03404.fasta:1166
-PF03460.fasta:4336
-PF03916.fasta:1060
-PF03967.fasta:68
-PF04069.fasta:2717
-PF04077.fasta:273
-PF04173.fasta:72
-PF04295.fasta:839
-PF04358.fasta:478
-PF04663.fasta:58
-PF04879.fasta:3453
-PF04945.fasta:852
-PF05239.fasta:4201
-PF05398.fasta:15
-PF06099.fasta:51
-PF07680.fasta:46
-PF07682.fasta:10
-PF07883.fasta:11374
-PF07992.fasta:33500
-PF08669.fasta:4191
-PF08770.fasta:365
-PF09084.fasta:4738
-PF09242.fasta:189
-PF09459.fasta:186
-PF10418.fasta:1258
-PF10518.fasta:1273
-PF11511.fasta:7
-PF12139.fasta:91
-PF12798.fasta:96
-PF12806.fasta:1319
-PF12831.fasta:1891
-PF12838.fasta:6756
-PF12857.fasta:294
-PF13183.fasta:3576
-PF13193.fasta:26312
-PF13237.fasta:1710A3V2Q0_9RHOB
-PF13247.fasta:2341
-PF13360.fasta:7189
-PF13442.fasta:6425
-PF13501.fasta:361
-PF13570.fasta:1203
-PF13577.fasta:2130
-PF13579.fasta:2343
-PF13746.fasta:591
-PF14306.fasta:945
 
 From the header of each sequence, obtain the list of UNIPROT identifiers in order to obtain the corresponding sps for each protein sequence
 for fasta in *; do grep  ">" $fasta | sed 's/ /\t/g' | sed 's/>//g' | sed 's/\//\t/g' | cut -f 1  > $fasta.uniprot.txt ; done
