@@ -2,6 +2,11 @@
 1) Dowload the secuences from pfam database 
 
   $ wget "ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.fasta.gz"
+  $ gunzip Pfam-A.fasta.gz
+  
+  #In this point we are going to use all the pfams? or only the informative ones?
+  
+  (Pfam H'>0.5) 
 
 2) Obtain fasta secuenes from each pfams (pfam_terms.tab)  in separated files 
 
