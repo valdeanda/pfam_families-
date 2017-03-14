@@ -5,8 +5,14 @@
   $ gunzip Pfam-A.fasta.gz
   
   #In this point we are going to use all the pfams? or only the informative ones?
+ 
+ 
+ less entropies_matrix_entropies.tab  | cut -f 1,2 | awk '$2>=0.3'  | wc > informative.pfams 
+
+
+
+
   
-  (Pfam H'>0.5) 
 
 2) Obtain fasta secuenes from each pfams (pfam_terms.tab)  in separated files 
 
@@ -15,6 +21,29 @@
 3) Check if the number of sequences corresponde to the numer of sequences for each model, (check number_seq.txt file)  
 
   $ grep -c ">" *.fasta 
+  
+    
+PF00374.fasta:3045
+PF01058.fasta:2941
+PF01568.fasta:8859
+PF01747.fasta:906
+PF02635.fasta:3268
+PF02662.fasta:794
+PF02665.fasta:1025
+PF03916.fasta:1597
+PF04358.fasta:752
+PF04879.fasta:5399
+PF08770.fasta:661
+PF09242.fasta:325
+PF09459.fasta:311
+PF10418.fasta:1903
+PF12139.fasta:130
+PF12800.fasta:1181
+PF13247.fasta:3373
+PF13501.fasta:671
+PF14306.fasta:1382
+PF14697.fasta:2096
+PF17179.fasta:485
 
 4) From the header of each sequence, obtain the list of UNIPROT identifiers in order to obtain the corresponding species for each
 protein sequence
