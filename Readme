@@ -1,0 +1,47 @@
+1) Starting with the Sulfur Genomes: (obtained from supplementary table 8 SS) 
+ID  Accesion  SS  guild cat_met
+GCF_000024605.1_ASM2460v1       GCF_000024605.1 12.508  SRB/SR  Suli
+GCF_000025285.1_ASM2528v1       GCF_000025285.1 12.024  SRB     Suli
+GCF_001548055.1_ASM154805v1     GCF_001548055.1 6.225   SR      Suli
+GCF_000020645.1_ASM2064v1       GCF_000020645.1 11.836  GSB     Suli
+GCF_000020545.1_ASM2054v1       GCF_000020545.1 11.649  GSB     Suli
+GCF_000012585.1_ASM1258v1       GCF_000012585.1 11.625  GSB     Suli
+GCF_000012745.1_ASM1274v1       GCF_000012745.1 11.61   CLSB    Suli
+GCF_000024325.1_ASM2432v1       GCF_000024325.1 11.511  SRB     Suli
+GCF_000012665.1_ASM1266v1       GCF_000012665.1 11.5    SRB     Suli
+GCF_000015485.1_ASM1548v1       GCF_000015485.1 11.442  SRB     Suli
+GCF_000006985.1_ASM698v1        GCF_000006985.1 11.354  GSB     Suli
+GCF_000021385.1_ASM2138v1       GCF_000021385.1 11.093  SRB     Suli
+GCF_000246985.2_ASM24698v3      GCF_000246985.2 6.189   SR      Suli
+
+2) Dowload the refseq file 
+wget "ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt"
+
+3) Get the identifiers 
+awk '$3>=8.705{print $2}' assembly_azufre_SS.txt    > ss8.705.genomes.list 
+
+4) Obtain the assembly data from those genomes 
+non redundatnt genomes refseq 
+(cp from github) 
+cp /data/Gen/assembly_refseq.nr2016.txt  
+
+5) 
+
+for i in `cat ss8.705.accesions.txt`; do grep $i ../assembly_refseq.nr2016.txt  >> ss8.705.refseq.txt ; done
+for i in `cat suli.accesions.txt` ;do grep $i ../assembly_refseq.nr2016.txt >> suli.refseq.txt ; done
+for i in `cat sur.accesions.txt` ;do grep $i ../assembly_refseq.nr2016.txt >> suli.refseq.txt ; done
+
+
+
+6) less ss8.705.refseq.txt | cut -f 20 | sed 's/$/\/*.faa.gz/g' > ss8.705.proteomes.dowload.txt 
+
+ less ss8.705.genomes.refseq.txt  | cut -f 20 | sed 's/$/\/*_genomic.gff.gz/g'> ss8.705.genomes.dowload.links.gff.txt 
+
+
+
+
+7) wget -i  ss8.705.genomes.dowload.links.txt 
+
+
+
+
